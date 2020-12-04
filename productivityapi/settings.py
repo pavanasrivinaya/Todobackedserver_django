@@ -25,7 +25,7 @@ SECRET_KEY = 'vdnwxn4#tj#uj+8^$ma0sc&4f-g6fy!xe!-9apqc*e9dhyt%+&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['todobackenddjango.herokuapp.com','*']
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', #DJANGO WHITENOISE CONFIGURATION
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -131,4 +132,17 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
+
+
+if os.getcwd() == '/app':
+
+    import dj_database_url
+
+    db_from_env = dj_database_url.config(conn_max_age=500)
+
+    DATABASES['default'].update(db_from_env)
+
+    #Honor the 'X-forwarded-Proto' header for request.is_secure().
+
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
