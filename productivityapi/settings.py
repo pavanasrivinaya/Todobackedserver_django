@@ -59,8 +59,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
-
+CORS_ALLOWED_ORIGINS = [
+    "https://todobackenddjango.herokuapp.com",
+    "http://localhost:8000",
+]
 
 ROOT_URLCONF = 'productivityapi.urls'
 
